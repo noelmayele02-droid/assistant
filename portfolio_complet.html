@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ALBERT MAYELE – Futur Ingénieur en Cybersécurité</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --bg: #0a0b14;
+      --bg-alt: #0f111b;
+      --card-bg: #141624;
+      --text: #e0e0ff;
+      --text-light: #a0a0d0;
+      --accent: #00f0ff;
+      --accent-dark: #0088cc;
+      --success: #00ff88;
+      --font: 'Consolas', 'Courier New', monospace;
+    }
+
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg);
+      font-family: var(--font);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Animation d'ouverture */
+    #left-curtain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 100vh;
+      background: #000;
+      z-index: 3000;
+      transform: translateX(0);
+      transition: transform 1.5s cubic-bezier(0.86, 0, 0.07, 1);
+    }
+
+    #right-curtain {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 50%;
+      height: 100vh;
+      background: #000;
+      z-index: 3000;
+      transform: translateX(0);
+      transition: transform 1.5s cubic-bezier(0.86, 0, 0.07, 1);
+    }
+
+    #overlayText {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3.2em;
+      color: white;
+      font-weight: 900;
+      text-align: center;
+      z-index: 3500;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
+      opacity: 1;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+
+    .stars-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2500;
+      background: radial-gradient(circle at center, #0a0a1f 0%, #000 100%);
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 0.5s ease;
+    }
+
+    .curtains-open #left-curtain {
+      transform: translateX(-100%);
+    }
+
+    .curtains-open #right-curtain {
+      transform: translateX(100%);
+    }
+
+    .curtains-open #overlayText,
+    .curtains-open .stars-bg {
+      opacity: 0;
+    }
+
+    /* Fond cyber */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: 
+        radial-gradient(circle at 20% 30%, rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+        radial-gradient(circle at 80% 70%, rgba(0, 255, 136, 0.02) 1px, transparent 1px);
+      background-size: 30px 30px;
+      z-index: -2;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    section {
+      padding: 80px 0;
+    }
+
+    h2 {
+      font-size: 2.4rem;
+      text-align: center;
+      color: var(--accent);
+      position: relative;
+      margin-bottom: 2.5rem;
+    }
+
+    h2::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--success));
+      margin: 0.7rem auto;
+      border-radius: 2px;
+    }
+
+    /* Navigation */
+    header {
+      background: rgba(10, 11, 20, 0.95);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--accent-dark);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-icons a {
+      color: var(--text-light);
+      font-size: 1.1rem;
+      transition: color 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: var(--accent);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 120px 20px;
+      background: linear-gradient(135deg, var(--bg), var(--bg-alt));
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .hero-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 50px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero-text h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, var(--accent), var(--success));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .typewriter {
+      border-right: 2px solid var(--accent);
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: typing 3.5s steps(35), blink 0.75s step-end infinite alternate;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    .profile-photo {
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+      transition: all 0.4s ease;
+    }
+
+    .profile-photo:hover {
+      transform: scale(1.05) rotate(3deg);
+      box-shadow: 0 0 30px rgba(0, 240, 255, 0.6);
+    }
+
+    /* Bouton CV */
+    .cv-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 25px;
+      background: linear-gradient(90deg, var(--accent), var(--success));
+      color: var(--bg);
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 30px;
+      transition: all 0.3s;
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+    }
+
+    .cv-btn:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.8);
+    }
+
+    /* Animations au scroll */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.appear {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: var(--accent-dark);
+      left: 50%;
+      margin-left: -2px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 50px;
+      width: 100%;
+    }
+
+    .timeline-item:nth-child(odd) {
+      padding-right: calc(50% + 30px);
+      text-align: right;
+    }
+
+    .timeline-item:nth-child(even) {
+      padding-left: calc(50% + 30px);
+      text-align: left;
+    }
+
+    .timeline-content {
+      background: var(--card-bg);
+      padding: 20px;
+      border-radius: 10px;
+      position: relative;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    }
+
+    .timeline-content::before {
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: var(--accent);
+      border-radius: 50%;
+      top: 30px;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content::before {
+      right: -50px;
+    }
+
+    .timeline-item:nth-child(even) .timeline-content::before {
+      left: -50px;
+    }
+
+    .timeline-date {
+      color: var(--success);
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    /* Carrousel */
+    .carousel-container {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .carousel-wrapper {
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+    }
+
+    .carousel-inner {
+      display: flex;
+      transition: transform 0.5s ease;
+      gap: 20px;
+      padding: 20px 0;
+    }
+
+    .carousel-item {
+      min-width: 280px;
+      background: var(--card-bg);
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+
+    .carousel-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 240, 255, 0.2);
+    }
+
+    .project-image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .project-caption {
+      padding: 15px;
+      background: var(--bg-alt);
+      text-align: center;
+    }
+
+    .project-caption h3 {
+      color: var(--accent);
+      margin-bottom: 5px;
+      font-size: 1.1rem;
+    }
+
+    .project-caption p {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      transition: all 0.3s;
+    }
+
+    .carousel-btn:hover {
+      background: var(--accent);
+      color: var(--bg);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .carousel-btn.prev { left: 10px; }
+    .carousel-btn.next { right: 10px; }
+
+    /* Section projets hors-ligne */
+    .offline-projects {
+      background: var(--bg-alt);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+      border: 1px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--success));
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0, 240, 255, 0.3);
+      border-color: var(--accent);
+    }
+
+    .project-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .project-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .project-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--accent), var(--success));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--bg);
+      flex-shrink: 0;
+    }
+
+    .project-card h3 {
+      color: var(--accent);
+      font-size: 1.3rem;
+      margin: 0;
+    }
+
+    .project-card p {
+      color: var(--text-light);
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    .tech-tag {
+      background: rgba(0, 240, 255, 0.1);
+      color: var(--accent);
+      padding: 5px 12px;
+      border-radius: 15px;
+      font-size: 0.85rem;
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      transition: all 0.3s;
+    }
+
+    /* Section projets académiques/personnels */
+    .academic-projects {
+      background: var(--bg);
+    }
+
+    .academic-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 35px;
+      margin-top: 30px;
+    }
+
+    .academic-card {
+      background: linear-gradient(135deg, var(--card-bg) 0%, rgba(15, 17, 27, 0.8) 100%);
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .academic-card::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, var(--accent), var(--success), var(--accent));
+      border-radius: 15px;
+      opacity: 0;
+      z-index: -1;
+      transition: opacity 0.4s ease;
+    }
+
+    .academic-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 15px 40px rgba(0, 240, 255, 0.25);
+    }
+
+    .academic-card:hover::before {
+      opacity: 1;
+    }
+
+    .academic-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .academic-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(0, 255, 136, 0.2));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      flex-shrink: 0;
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+    }
+
+    .academic-title {
+      flex: 1;
+    }
+
+    .academic-card h3 {
+      color: var(--accent);
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    .academic-type {
+      display: inline-block;
+      background: rgba(0, 255, 136, 0.15);
+      color: var(--success);
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      border: 1px solid rgba(0, 255, 136, 0.3);
+    }
+
+    .academic-card p {
+      color: var(--text-light);
+      line-height: 1.7;
+      margin-bottom: 20px;
+      font-size: 0.95rem;
+    }
+
+    .academic-features {
+      list-style: none;
+      margin: 15px 0;
+      padding: 0;
+    }
+
+    .academic-features li {
+      color: var(--text-light);
+      padding: 8px 0;
+      padding-left: 25px;
+      position: relative;
+      font-size: 0.9rem;
+    }
+
+    .academic-features li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .academic-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(0, 240, 255, 0.2);
+    }
+
+    .academic-tag {
+      background: rgba(0, 240, 255, 0.08);
+      color: var(--accent);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      border: 1px solid rgba(0, 240, 255, 0.25);
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .academic-tag:hover {
+      background: rgba(0, 240, 255, 0.15);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 240, 255, 0.2);
+    }
+
+    .academic-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(0, 240, 255, 0.15);
+    }
+
+    .status-badge {
+      padding: 5px 12px;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+
+    .status-completed {
+      background: rgba(0, 255, 136, 0.15);
+      color: var(--success);
+      border: 1px solid rgba(0, 255, 136, 0.3);
+    }
+
+    .status-progress {
+      background: rgba(255, 165, 0, 0.15);
+      color: #FFA500;
+      border: 1px solid rgba(255, 165, 0, 0.3);
+    }
+
+    /* Blog */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .blog-card {
+      background: var(--card-bg);
+      padding: 20px;
+      border-radius: 8px;
+      transition: transform 0.3s;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-5px);
+      border-left: 3px solid var(--success);
+    }
+
+    .blog-card h4 {
+      color: var(--success);
+      margin-bottom: 10px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 60px 0 30px;
+      background: #06070e;
+      color: var(--text-light);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin: 20px 0;
+    }
+
+    .footer-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      #overlayText {
+        font-size: 2em;
+      }
+      .hero-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      .timeline::before { left: 30px; }
+      .timeline-item:nth-child(odd),
+      .timeline-item:nth-child(even) {
+        padding: 0 0 0 70px;
+        text-align: left;
+      }
+      .timeline-item:nth-child(odd) .timeline-content::before,
+      .timeline-item:nth-child(even) .timeline-content::before {
+        left: -52px;
+      }
+      .carousel-inner { gap: 15px; }
+      .carousel-item { min-width: 220px; }
+      .carousel-btn { width: 35px; height: 35px; font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Animation d'ouverture -->
+  <div class="stars-bg"></div>
+  <div id="overlayText">Albert Isaac MAYELE</div>
+  <div id="left-curtain"></div>
+  <div id="right-curtain"></div>
+
+  <!-- En-tête -->
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">ALBERT MAYELE</div>
+        <ul class="nav-links">
+          <li><a href="#apropos">À propos</a></li>
+          <li><a href="#parcours">Parcours</a></li>
+          <li><a href="#projets">Projets</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="social-icons">
+          <a href="https://github.com/"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/feed/"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text fade-in">
+        <h1>Albert Isaac MAYELE</h1>
+        <p class="typewriter">Futur Ingénieur en Cybersécurité</p>
+        <p>Étudiant en <strong>Bachelor 2 Cybersécurité</strong> à YNOV CAMPUS (LILLE).<br>
+        Licencié en <strong>Systèmes Informatiques & Génie Logiciel</strong> à ISTP de B/V (CONGO).<br>
+        <strong style="color: var(--success);">🎯 Recherche un stage ou une alternance en Cybersécurité / Développement / IT</strong></p>
+        <a href="CV Isaac_Recherche stage France.pdf" class="cv-btn" download="CV Isaac_Recherche stage France.pdf">
+          📄 Télécharger mon CV
+        </a>
+      </div>
+      <div class="hero-image fade-in">
+        <img src="WhatsApp Image 2025-12-27 at 00.15.55.jpeg" alt="Isaac MAYELE" class="profile-photo" />
+      </div>
+    </div>
+  </section>
+
+  <!-- À propos -->
+  <section id="apropos" class="about">
+    <div class="container fade-in">
+      <h2>À propos de moi</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto; color: var(--text-light);">
+        Fort d'une <strong>licence en Systèmes Informatiques et Génie Logiciel</strong> au Congo, je poursuis aujourd'hui un <strong>Bachelor en Cybersécurité à YNOV Lille</strong>. 
+        Je combine passion pour la sécurité informatique, rigueur académique et expérience terrain en développement et administration système.  
+        Mon objectif : maîtriser les techniques de <strong>pentesting, cryptographie, reverse engineering</strong> et <strong>analyse de malwares</strong> pour devenir <strong>Ingénieur en Cybersécurité</strong>.
+      </p>
+    </div>
+  </section>
+
+  <!-- Compétences techniques -->
+      <div style="max-width: 1000px; margin: 0 auto;">
+        <h3 style="text-align: center; color: var(--success); font-size: 1.8rem; margin-bottom: 30px;">Compétences Techniques</h3>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
+          <!-- Programmation -->
+          <div style="background: var(--card-bg); padding: 25px; border-radius: 12px; border-left: 4px solid var(--accent);">
+            <h4 style="color: var(--accent); margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+              <span style="font-size: 1.5rem;">💻</span> Programmation
+            </h4>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">Java</span>
+              <span class="tech-tag">C/C++</span>
+              <span class="tech-tag">C#</span>
+              <span class="tech-tag">VB.NET</span>
+              <span class="tech-tag">PHP</span>
+            </div>
+          </div>
+
+          <!-- Web -->
+          <div style="background: var(--card-bg); padding: 25px; border-radius: 12px; border-left: 4px solid var(--success);">
+            <h4 style="color: var(--success); margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+              <span style="font-size: 1.5rem;">🌐</span> Développement Web
+            </h4>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+              <span class="tech-tag">HTML5</span>
+              <span class="tech-tag">CSS3</span>
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">React</span>
+              <span class="tech-tag">Node.js</span>
+              <span class="tech-tag">PHP</span>
+            </div>
+          </div>
+
+          <!-- Cybersécurité -->
+          <div style="background: var(--card-bg); padding: 25px; border-radius: 12px; border-left: 4px solid #FF6B6B;">
+            <h4 style="color: #FF6B6B; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+              <span style="font-size: 1.5rem;">🔐</span> Cybersécurité
+            </h4>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+              <span class="tech-tag">Pentesting</span>
+              <span class="tech-tag">Nmap</span>
+              <span class="tech-tag">Wireshark</span>
+              <span class="tech-tag">Kali Linux</span>
+              <span class="tech-tag">Metasploit</span>
+              <span class="tech-tag">OSINT</span>
+            </div>
+          </div>
+
+          <!-- Réseaux & Systèmes -->
+          <div style="background: var(--card-bg); padding: 25px; border-radius: 12px; border-left: 4px solid #FFA500;">
+            <h4 style="color: #FFA500; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+              <span style="font-size: 1.5rem;">🖥️</span> Systèmes & Réseaux
+            </h4>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+              <span class="tech-tag">Windows</span>
+              <span class="tech-tag">Linux</span>
+              <span class="tech-tag">Packet Tracer</span>
+              <span class="tech-tag">TCP/IP</span>
+            </div>
+          </div>
+
+          <!-- Outils -->
+          <div style="background: var(--card-bg); padding: 25px; border-radius: 12px; border-left: 4px solid #9B59B6;">
+            <h4 style="color: #9B59B6; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+              <span style="font-size: 1.5rem;">🛠️</span> Outils & Logiciels
+            </h4>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+              <span class="tech-tag">Git/GitHub</span>
+              <span class="tech-tag">WinDev</span>
+              <span class="tech-tag">Visual Studio</span>
+              <span class="tech-tag">Pack Office</span>
+              <span class="tech-tag">SQL Server</span>
+            </div>
+          </div>
+
+          <!-- Soft Skills -->
+          <div style="background: var(--card-bg); padding: 25px; border-radius: 12px; border-left: 4px solid #3498DB;">
+            <h4 style="color: #3498DB; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+              <span style="font-size: 1.5rem;">🎯</span> Compétences Transversales
+            </h4>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+              <span class="tech-tag">Travail d'équipe</span>
+              <span class="tech-tag">Autonomie</span>
+              <span class="tech-tag">Pédagogie</span>
+              <span class="tech-tag">Résolution de problèmes</span>
+            </div>
+          </div>
+        </div>
+
+  <!-- Parcours -->
+  <section id="parcours" class="parcours">
+    <div class="container fade-in">
+      <h2>Mon parcours</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">2021 – 2022</div>
+            <h3>Enseignant en Maths & Physique</h3>
+            <p>Préparation de cours, mentorat, évaluation.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">2022 – 2023</div>
+            <h3>GENIUS CENTER – Employé Informaticien</h3>
+            <p>Support technique, gestion de postes, sensibilisation à la cybersécurité.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">2022 – 2023</div>
+            <h3>Licence 1 – ISTP Congo</h3>
+            <p>Systèmes Informatiques & Génie Logiciel.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">2023 – 2024</div>
+            <h3>Licence 2 – ISTP Congo</h3>
+            <p>Systèmes Informatiques & Génie Logiciel.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">2024 – 2025</div>
+            <h3>Licence 3 – ISTP Congo</h3>
+            <p>Systèmes Informatiques & Génie Logiciel.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">Objectif 2025</div>
+            <h3>Bachelor Cybersécurité – YNOV Campus</h3>
+            <p>Formation intensive en pentesting, SOC, gestion des risques.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projets -->
+<section id="projets" class="projects">
+  <div class="container">
+    <h2>Mes projets en ligne </h2>
+    
+    <div class="carousel-container">
+      <button class="carousel-btn prev">&lt;</button>
+      
+      <div class="carousel-wrapper">
+        <div class="carousel-inner" id="carouselInner">
+
+          <div class="carousel-item">
+            <a href="https://stostep.tech/" target="_blank">
+              <img src="Capture d'écran 2025-12-27 180427.png" alt="KeyLogger Defender" class="project-image" />
+            </a>
+            <div class="project-caption">
+              <h3>Stostep</h3>
+              <p>L'agence digitale qui met la technologie à votre service.</p>
+              <a href="https://stostep.tech/" target="_blank" class="project-link">Voir le projet →</a>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <a href="https://noelmayele02-droid.github.io/Infotelcom/" target="_blank">
+              <img src="Capture d'écran 2025-12-27 164645.png" alt="SecureScan" class="project-image" />
+            </a>
+            <div class="project-caption">
+              <h3>Infotelcom</h3>
+              <p>Accélérez Votre Potentiel IT.</p>
+              <a href="https://noelmayele02-droid.github.io/Infotelcom/" target="_blank" class="project-link">Voir le projet →</a>
+            </div>
+          </div>
+          
+          <div class="carousel-item">
+            <a href="https://assistant-ia-copy-30d3afa7.base44.app/" target="_blank">
+              <img src="Capture d'écran 2025-12-27 165616.png" alt="AuthShield" class="project-image" />
+            </a>
+            <div class="project-caption">
+              <h3>Assistant IA</h3>
+              <p>Un assistant pour vous aidez dans vos besoins.</p>
+              <a href="https://assistant-ia-copy-30d3afa7.base44.app/" target="_blank" class="project-link">Voir le projet →</a>
+            </div>
+          </div>
+          
+          <div class="carousel-item">
+            <a href="https://nexus-ai-copy-8e384cc0.base44.app/" target="_blank">
+              <img src="Capture d'écran 2025-12-27 171309.png" alt="PacketSniffer Pro" class="project-image" />
+            </a>
+            <div class="project-caption">
+              <h3>Nexus AI</h3>
+              <p>Nexus AI est votre assistant IA personnel.</p>
+              <a href="https://nexus-ai-copy-8e384cc0.base44.app/" target="_blank" class="project-link">Voir le projet →</a>
+            </div>
+          </div>
+          
+          <div class="carousel-item">
+            <a href="https://nego-pro-copy-5f37f98a.base44.app/" target="_blank">
+              <img src="Capture d'écran 2025-12-27 175145.png" alt="CryptoVault" class="project-image" />
+            </a>
+            <div class="project-caption">
+              <h3>Nego-Pro</h3>
+              <p>Votre coach IA personnel pour maîtriser la négociation salariale et comment gagner un entretien.</p>
+              <a href="https://nego-pro-copy-5f37f98a.base44.app/" target="_blank" class="project-link">Voir le projet →</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      
+      <button class="carousel-btn next">&gt;</button>
+    </div>
+  </div>
+</section>
+
+<!-- Projets Académiques et Personnels -->
+  <section id="projets-autres" class="academic-projects">
+    <div class="container fade-in">
+      <h2>Autres Projets</h2>
+      
+      <div class="academic-grid">
+        <div class="academic-card">
+          <div class="academic-header">
+            <div class="academic-icon">💻</div>
+            <div class="academic-title">
+              <h3>Système de Gestion Scolaire</h3>
+              <span class="academic-type">Projet Académique</span>
+            </div>
+          </div>
+          <p>Application desktop complète pour la gestion d'établissements scolaires. Gère les inscriptions, notes, absences, emplois du temps et génération de bulletins.</p>
+          <ul class="academic-features">
+            <li>Interface intuitive multi-utilisateurs (Admin, Prof, Élève)</li>
+            <li>Base de données relationnelle optimisée</li>
+            <li>Génération automatique de rapports PDF</li>
+            <li>Système de sauvegarde automatique</li>
+          </ul>
+          <div class="academic-tech">
+            <span class="academic-tag">WinDev</span>
+            <span class="academic-tag">SQL Server</span>
+            <span class="academic-tag">Crystal Reports</span>
+          </div>
+          <div class="academic-status">
+            <span class="status-badge status-completed">✓ Terminé</span>
+          </div>
+        </div>
+
+        <div class="academic-card">
+          <div class="academic-header">
+            <div class="academic-icon">🏥</div>
+            <div class="academic-title">
+              <h3>Gestion de Cabinet Médical</h3>
+              <span class="academic-type">Projet Personnel</span>
+            </div>
+          </div>
+          <p>Logiciel de gestion pour cabinets médicaux avec dossiers patients électroniques, gestion des rendez-vous et facturation.</p>
+          <ul class="academic-features">
+            <li>Dossiers médicaux électroniques sécurisés</li>
+            <li>Agenda intelligent avec notifications</li>
+            <li>Gestion des prescriptions et ordonnances</li>
+            <li>Module de facturation et statistiques</li>
+          </ul>
+          <div class="academic-tech">
+            <span class="academic-tag">C++</span>
+            <span class="academic-tag">Qt Framework</span>
+            <span class="academic-tag">MySQL</span>
+            <span class="academic-tag">Encryption</span>
+          </div>
+          <div class="academic-status">
+            <span class="status-badge status-completed">✓ Terminé</span>
+          </div>
+        </div>
+
+        <div class="academic-card">
+          <div class="academic-header">
+            <div class="academic-icon">🏪</div>
+            <div class="academic-title">
+              <h3>Point de Vente & Gestion Stock</h3>
+              <span class="academic-type">Projet Client</span>
+            </div>
+          </div>
+          <p>Solution complète de point de vente avec gestion de stock en temps réel, multi-magasins et analytics de ventes.</p>
+          <ul class="academic-features">
+            <li>Interface caisse rapide et ergonomique</li>
+            <li>Gestion multi-magasins centralisée</li>
+            <li>Alertes de stock automatiques</li>
+            <li>Tableau de bord avec KPIs en temps réel</li>
+          </ul>
+          <div class="academic-tech">
+            <span class="academic-tag">Python</span>
+            <span class="academic-tag">Tkinter</span>
+            <span class="academic-tag">SQLite</span>
+            <span class="academic-tag">Charts.js</span>
+          </div>
+          <div class="academic-status">
+            <span class="status-badge status-completed">✓ Terminé</span>
+          </div>
+        </div>
+
+        <div class="academic-card">
+          <div class="academic-header">
+            <div class="academic-icon">📱</div>
+            <div class="academic-title">
+              <h3>Application Mobile To-Do</h3>
+              <span class="academic-type">Projet Personnel</span>
+            </div>
+          </div>
+          <p>Application mobile de gestion de tâches avec synchronisation cloud, rappels intelligents et collaboration d'équipe.</p>
+          <ul class="academic-features">
+            <li>Synchronisation multi-appareils</li>
+            <li>Notifications push contextuelles</li>
+            <li>Partage et collaboration en équipe</li>
+            <li>Mode hors-ligne avec sync auto</li>
+          </ul>
+          <div class="academic-tech">
+            <span class="academic-tag">Java</span>
+            <span class="academic-tag">Android Studio</span>
+            <span class="academic-tag">Firebase</span>
+            <span class="academic-tag">Material Design</span>
+          </div>
+          <div class="academic-status">
+            <span class="status-badge status-progress">⏳ En cours</span>
+          </div>
+        </div>
+
+        <div class="academic-card">
+          <div class="academic-header">
+            <div class="academic-icon">🌐</div>
+            <div class="academic-title">
+              <h3>Simulateur de Réseau</h3>
+              <span class="academic-type">Projet Académique</span>
+            </div>
+          </div>
+          <p>Outil de simulation de topologies réseau pour l'apprentissage des protocoles TCP/IP, routage et configuration de switches.</p>
+          <ul class="academic-features">
+            <li>Visualisation graphique des topologies</li>
+            <li>Simulation de protocoles (DHCP, DNS, HTTP)</li>
+            <li>Analyse de paquets intégrée</li>
+            <li>Scénarios de troubleshooting</li>
+          </ul>
+          <div class="academic-tech">
+            <span class="academic-tag">Python</span>
+            <span class="academic-tag">NetworkX</span>
+            <span class="academic-tag">Packet Tracer</span>
+            <span class="academic-tag">Scapy</span>
+          </div>
+          <div class="academic-status">
+            <span class="status-badge status-completed">✓ Terminé</span>
+          </div>
+        </div>
+
+        <div class="academic-card">
+          <div class="academic-header">
+            <div class="academic-icon">🤖</div>
+            <div class="academic-title">
+              <h3>Chatbot IA Personnel</h3>
+              <span class="academic-type">Projet Personnel</span>
+            </div>
+          </div>
+          <p>Assistant virtuel intelligent capable de comprendre le langage naturel, gérer des tâches et s'intégrer à différentes APIs.</p>
+          <ul class="academic-features">
+            <li>Traitement du langage naturel (NLP)</li>
+            <li>Apprentissage des préférences utilisateur</li>
+            <li>Intégration APIs (météo, news, calendrier)</li>
+            <li>Commandes vocales (Speech-to-Text)</li>
+          </ul>
+          <div class="academic-tech">
+            <span class="academic-tag">Python</span>
+            <span class="academic-tag">NLTK</span>
+            <span class="academic-tag">TensorFlow</span>
+            <span class="academic-tag">OpenAI API</span>
+          </div>
+          <div class="academic-status">
+            <span class="status-badge status-progress">⏳ En cours</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="contact">
+    <div class="container fade-in" style="text-align: center;">
+      <h2>Me contacter</h2>
+      <p>Je suis ouvert aux échanges sur la cybersécurité, les stages ou les opportunités de formation.</p>
+      <p style="margin-top: 20px;">
+        <a href="mailto:noel.mayele02@gmail.com" style="color: var(--accent); text-decoration: none;">📧 noel.mayele02@gmail.com</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2025 ALBERT MAYELE – Futur Ingénieur en Cybersécurité</p>
+      <div class="footer-links">
+        <a href="CV Isaac_Recherche stage France.pdf" download="CV Isaac_Recherche stage France.pdf">CV</a>
+        <a href="https://github.com/">GitHub</a>
+        <a href="https://www.linkedin.com/feed/">LinkedIn</a>
+      </div>
+      <p>Conçu avec passion et rigueur éthique</p>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script>
+    // Animation d'ouverture au chargement
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.body.classList.add('curtains-open');
+      }, 500);
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Fade-in au scroll
+      const fadeElements = document.querySelectorAll('.fade-in');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('appear');
+          }
+        });
+      }, { threshold: 0.1 });
+      fadeElements.forEach(el => observer.observe(el));
+
+      // Carrousel
+      const carouselInner = document.getElementById('carouselInner');
+      const prevBtn = document.querySelector('.carousel-btn.prev');
+      const nextBtn = document.querySelector('.carousel-btn.next');
+      const items = document.querySelectorAll('.carousel-item');
+      let currentIndex = 0;
+      const itemWidth = 280;
+      const gap = 20;
+
+      function updateCarousel() {
+        const offset = -(currentIndex * (itemWidth + gap));
+        carouselInner.style.transform = `translateX(${offset}px)`;
+      }
+
+      prevBtn.addEventListener('click', () => {
+        if (currentIndex > 0) {
+          currentIndex--;
+          updateCarousel();
+        }
+      });
+
+      nextBtn.addEventListener('click', () => {
+        const visibleItems = Math.floor(carouselInner.parentElement.clientWidth / (itemWidth + gap));
+        if (currentIndex < items.length - visibleItems) {
+          currentIndex++;
+          updateCarousel();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
